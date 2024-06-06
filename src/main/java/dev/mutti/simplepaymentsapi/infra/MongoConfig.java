@@ -14,10 +14,9 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 
 @Configuration
 @EnableMongoRepositories(basePackages = "dev.mutti.simplepaymentsapi")
-
 public class MongoConfig extends AbstractMongoClientConfiguration {
 
-    private Environment env;
+    private final Environment env;
 
     public MongoConfig(Environment env) {
         this.env = env;
