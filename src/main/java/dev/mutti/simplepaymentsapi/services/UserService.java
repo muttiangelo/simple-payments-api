@@ -45,7 +45,6 @@ public class UserService {
 
     public double updateBalance(long userId, double amount) {
         User user = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException("User not found"));
-        userRepository.updateBalanceById(userId, user.getBalance() + amount);
-        return user.getBalance();
+        return userRepository.updateBalanceById(userId, user.getBalance() + amount);
     }
 }

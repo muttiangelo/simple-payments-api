@@ -1,5 +1,6 @@
 package dev.mutti.simplepaymentsapi.exception.handler;
 
+import dev.mutti.simplepaymentsapi.exception.TransactionNotAuthorizedException;
 import dev.mutti.simplepaymentsapi.exception.UserNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DuplicateKeyException;
@@ -21,8 +22,8 @@ public class RestExceptionHandler {
         return ResponseEntity.status(error.status()).body(error);
     }
 
-    @ExceptionHandler(CredentialException.class)
-    public ResponseEntity<RestErrorMessageDto> handleRuntimeException(CredentialException e) {
+    @ExceptionHandler({CredentialException.class, TransactionNotAuthorizedException.class})
+    public ResponseEntity<RestErrorMessageDto> handleRuntimeException(Exception e) {
         log.info("CredentialException caught: {}", e.getMessage());
         RestErrorMessageDto error = new RestErrorMessageDto(HttpStatus.UNAUTHORIZED, e.getMessage());
         return ResponseEntity.status(error.status()).body(error);
